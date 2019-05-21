@@ -49,6 +49,24 @@ namespace POC_Consumer_App
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddOpenIdConnect(o =>
+            {
+                o.ClientId = Configuration["Hydra:ClientId"];
+                o.ClientSecret = Configuration["Hydra:ClientSecret"];
+                o.Authority = Configuration["Hydra:Authority"];
+                o.RequireHttpsMetadata = false;
+
+                o.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
+                o.ResponseMode = OpenIdConnectResponseMode.Fragment;
+                o.ResponseType = OpenIdConnectResponseType.Code;
+
+            });
 
             services.AddMvc(opts => opts.RequireHttpsPermanent = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
