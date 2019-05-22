@@ -7,7 +7,7 @@ This is a sample consumer app for hydra built with ASP.NET core.
 ---
 ## Getting Started
 
-1. go to https://www.ory.sh/run-oauth2-server-open-source-api-security and follow all steps until you have a running login & consent provider. 
+1. go to https://www.ory.sh/run-oauth2-server-open-source-api-security and follow all steps until you have to create your OAuth 2.0 client. when creating you have to additional give "--token-endpoint-auth-method client_secret_post" as parameter so the token endpoint auth method is not "client_secret_basic". Now continue until you have a running login & consent provider. 
 2. take client-id, client-secret and callbacks into appsettings. Authority is your callback.
 3. run app 
 
